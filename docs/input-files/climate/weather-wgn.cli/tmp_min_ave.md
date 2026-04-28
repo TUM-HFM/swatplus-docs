@@ -4,8 +4,10 @@
 
 This value is calculated by summing the minimum air temperature for every day in the month for all years of record and dividing the sum by the number of days:
 
-μmnmon=∑d=1N∗Tmn,monNμmn\_{mon}=\frac{∑\_{d=1}^N\*T\_{mn,mon}}{N}μmnmon​=N∑d=1N​∗Tmn,mon​​
+$$
+μmn_{mon}=\frac{∑_{d=1}^N*T_{mn,mon}}{N}
+$$
 
-where μmnmonμmn\_{mon}μmnmon​is the mean daily minimum temperature for the month monmonmon (ºC), Tmn,monT\_{mn,mon}Tmn,mon​ is the daily minimum temperature on day ddd in month monmonmon (ºC), and NNNis the total number of daily minimum temperature records for month monmonmon.
+where $μmn_{mon}$is the mean daily minimum temperature for the month $mon$ (ºC), $T_{mn,mon}$ is the daily minimum temperature on day $d$ in month $mon$ (ºC), and $N$is the total number of daily minimum temperature records for month $mon$.
 
 Last updated 1 year ago

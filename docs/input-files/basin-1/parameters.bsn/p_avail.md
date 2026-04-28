@@ -10,9 +10,11 @@ A number of methods have been developed to measure the phosphorus availability i
 
 The P availability index is then calculated as:
 
-pai=Psolution,f−Psolution,ifertminPpai=\frac{P\_{solution,f}-P\_{solution,i}}{fert\_{minP}}pai=fertminP​Psolution,f​−Psolution,i​​
+$$
+pai=\frac{P_{solution,f}-P_{solution,i}}{fert_{minP}}
+$$
 
-where *pai* is the phosphorus availability index, Psolution,fP\_{solution,f}Psolution,f​ is the amount of phosphorus in solution after fertilization and incubation, Psolution,iP\_{solution,i}Psolution,i​ is the amount of phosphorus in solution before fertilization, and fertminPfert\_{minP}fertminP​ is the amount of soluble P fertilizer added to the sample.
+where *pai* is the phosphorus availability index, $P_{solution,f}$ is the amount of phosphorus in solution after fertilization and incubation, $P_{solution,i}$ is the amount of phosphorus in solution before fertilization, and $fert_{minP}$ is the amount of soluble P fertilizer added to the sample.
 
 #### References
 

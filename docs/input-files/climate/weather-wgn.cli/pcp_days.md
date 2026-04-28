@@ -4,8 +4,10 @@
 
 This parameter is calculated as
 
-dwet,i=dayswet,iyrsd\_{wet,i}=\frac{days\_{wet,i}}{yrs}dwet,i​=yrsdayswet,i​​
+$$
+d_{wet,i}=\frac{days_{wet,i}}{yrs}
+$$
 
-where dwet,id\_{wet,i}dwet,i​ is the average number of days of precipitation in month iii, dayswet,idays\_{wet,i}dayswet,i​ is the number of wet days in month iii during the entire period of record, and yrsyrsyrs is the number of years of record.
+where $d_{wet,i}$ is the average number of days of precipitation in month $i$, $days_{wet,i}$ is the number of wet days in month $i$ during the entire period of record, and $yrs$ is the number of years of record.
 
 Last updated 1 year ago

@@ -15,6 +15,9 @@ Dependencies:
 
 import requests
 import hashlib
+import sys
+
+USE_PLAYWRIGHT = "--playwright" in sys.argv
 import os
 import re
 import time
@@ -44,6 +47,17 @@ ALLOWED_PREFIXES = [
 ]
 BLOCKED_SEGMENTS = ["/theoretical-documentation"]
 
+# Pages that only appear in the GitBook sidebar when their section is active
+# (client-side render only) — seed them explicitly so the crawler visits them
+SEED_URLS = [
+    # Simulation Settings
+    "https://swatplus.gitbook.io/io-docs/introduction-1/simulation-settings/time.sim",
+    "https://swatplus.gitbook.io/io-docs/introduction-1/simulation-settings/print.prt",
+    "https://swatplus.gitbook.io/io-docs/introduction-1/simulation-settings/object.prt",
+    "https://swatplus.gitbook.io/io-docs/introduction-1/simulation-settings/object.cnt",
+    "https://swatplus.gitbook.io/io-docs/introduction-1/simulation-settings/constituents.cs",
+]
+
 # Known GitBook URL path -> MkDocs output file (relative to docs/)
 URL_TO_FILE = {
     "/io-docs":                                                    "index.md",
@@ -61,7 +75,7 @@ URL_TO_FILE = {
     "/io-docs/introduction-1/climate/slr.cli-and-solar-radiation-data-files": "input-files/climate/slr-cli.md",
     "/io-docs/introduction-1/climate/wnd.cli-and-wind-speed-data-files":      "input-files/climate/wnd-cli.md",
     "/io-docs/introduction-1/climate/atmo.cli":                    "input-files/climate/atmo-cli.md",
-    "/io-docs/introduction-1/basin-1":                             "input-files/basin/index.md",
+    "/io-docs/introduction-1/basin-1":                             "input-files/basin-1/index.md",
     "/io-docs/introduction-1/landscape-units":                     "input-files/landscape-units/index.md",
     "/io-docs/introduction-1/routing-units":                       "input-files/routing-units/index.md",
     "/io-docs/introduction-1/hydrologic-response-units":           "input-files/hru/index.md",
@@ -121,7 +135,7 @@ class GitbookConverter(MarkdownConverter):
 
     def convert_pre(self, el, text, **kwargs):
         # Pass through pre-built markdown table placeholders verbatim
-        if el.get("data-md-table"):
+        if el.get("data-md-table") or el.get("data-math"):
             return el.string or ""
         code = el.find("code")
         lang = ""
@@ -133,6 +147,13 @@ class GitbookConverter(MarkdownConverter):
             text = code.get_text()
         return f"\n\n```{lang}\n{text.strip()}\n```\n\n"
 
+    def convert_code(self, el, text, **kwargs):
+        """Inline code — preserve as `code` span."""
+        # Don't double-wrap if inside a <pre>
+        if el.parent and el.parent.name == "pre":
+            return text
+        return f"`{text.strip()}`" if text.strip() else ""
+
     def convert_a(self, el, text, **kwargs):
         href = el.get("href", "")
         if not href or href.startswith("#"):
@@ -141,6 +162,21 @@ class GitbookConverter(MarkdownConverter):
 
     def convert_svg(self, el, text, **kwargs):
         return ""
+
+    def convert_sub(self, el, text, **kwargs):
+        """Subscript — use HTML passthrough for MkDocs."""
+        return f"<sub>{text}</sub>"
+
+    def convert_sup(self, el, text, **kwargs):
+        """Superscript — use HTML passthrough for MkDocs."""
+        return f"<sup>{text}</sup>"
+
+    def convert_em(self, el, text, **kwargs):
+        """Italic — used for variable names in SWAT+ docs."""
+        return f"*{text}*" if text.strip() else ""
+
+    def convert_strong(self, el, text, **kwargs):
+        return f"**{text}**" if text.strip() else ""
 
 
 _converter = GitbookConverter(heading_style="ATX", bullets="-")
@@ -329,6 +365,53 @@ def rewrite_links(md_text: str, current_doc_rel: str) -> str:
 
 
 # ---------------------------------------------------------------------------
+# KaTeX equation extractor
+# ---------------------------------------------------------------------------
+
+def extract_katex(content: Tag) -> Tag:
+    """
+    KaTeX renders each equation as:
+      <span class="katex">
+        <span class="katex-mathml">
+          <math><semantics>
+            <annotation encoding="application/x-tex">RAW LATEX</annotation>
+          </semantics></math>
+        </span>
+        <span class="katex-html">...visual spans...</span>
+      </span>
+
+    We extract the raw LaTeX from the <annotation> tag and replace the entire
+    katex span with a plain text node: $latex$ or $$latex$$ (display).
+    MathJax in MkDocs then renders these correctly.
+    """
+    for katex_span in content.find_all("span", {"class": "katex"}):
+        annotation = katex_span.find("annotation",
+                                     {"encoding": "application/x-tex"})
+        if not annotation:
+            continue
+
+        latex = annotation.get_text(strip=True)
+
+        # Display equation: parent span has class "katex-display"
+        parent = katex_span.parent
+        parent_classes = " ".join(parent.get("class", [])) if parent else ""
+        is_display = "katex-display" in parent_classes
+
+        # Replace the entire katex span (or its display wrapper) with a
+        # Use a <pre data-math> placeholder — same as tables.
+        # markdownify passes these verbatim so LaTeX is never escaped.
+        ph = BeautifulSoup("<pre></pre>", "html.parser").find("pre")
+        ph["data-math"] = "1"
+        ph.string = (f"\n\n$$\n{latex}\n$$\n\n" if is_display
+                     else f"${latex}$")
+
+        target = parent if is_display else katex_span
+        target.replace_with(ph)
+
+    return content
+
+
+# ---------------------------------------------------------------------------
 # Content extraction
 # ---------------------------------------------------------------------------
 
@@ -349,6 +432,8 @@ def extract_content(soup: BeautifulSoup, doc_rel: str = "") -> str:
         tag.decompose()
 
     clean_headings(content)
+    if USE_PLAYWRIGHT:
+        extract_katex(content)       # extract LaTeX from KaTeX-rendered equations
     if doc_rel:
         localise_images(content, doc_rel)
     convert_gitbook_tables(content, soup)
@@ -370,7 +455,50 @@ def extract_page_title(soup: BeautifulSoup) -> str:
 # Crawl helpers
 # ---------------------------------------------------------------------------
 
+_playwright_ctx = None
+
+
+def get_browser_page():
+    """Return (playwright, browser, page) — created once, reused every fetch."""
+    global _playwright_ctx
+    if _playwright_ctx is None:
+        try:
+            from playwright.sync_api import sync_playwright
+        except ImportError:
+            print("\n  playwright not installed. Run:")
+            print("    pip install playwright && playwright install chromium\n")
+            raise
+        pw      = sync_playwright().start()
+        browser = pw.chromium.launch(headless=True)
+        page    = browser.new_page(user_agent=HEADERS["User-Agent"])
+        _playwright_ctx = (pw, browser, page)
+    return _playwright_ctx
+
+
+def close_browser():
+    """Shut down the persistent browser if it was opened."""
+    global _playwright_ctx
+    if _playwright_ctx:
+        pw, browser, _ = _playwright_ctx
+        browser.close()
+        pw.stop()
+        _playwright_ctx = None
+
+
 def fetch(url: str) -> str:
+    """
+    Fetch a page.
+    --playwright : persistent headless Chromium so JS/KaTeX fully renders.
+    default      : fast requests-based fetch.
+    """
+    if USE_PLAYWRIGHT:
+        _, _, page = get_browser_page()
+        page.goto(url, wait_until="networkidle", timeout=30000)
+        try:
+            page.wait_for_selector(".katex, main", timeout=8000)
+        except Exception:
+            pass
+        return page.content()
     r = requests.get(url, headers=HEADERS, timeout=30)
     r.raise_for_status()
     return r.text
@@ -429,7 +557,7 @@ def derive_rel_path(path: str) -> str:
 # ---------------------------------------------------------------------------
 
 def crawl() -> OrderedDict:
-    queue   = [BASE_URL]
+    queue   = [BASE_URL] + SEED_URLS
     visited = set()
     pages   = OrderedDict()
 
@@ -605,4 +733,5 @@ if __name__ == "__main__":
     print("Updating mkdocs.yml nav ...")
     nav = build_nav(pages)
     update_mkdocs_yml(nav)
+    close_browser()   # clean up Playwright if it was used
     print("\nDone! Run:  mkdocs serve")

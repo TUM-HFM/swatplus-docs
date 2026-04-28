@@ -4,9 +4,9 @@
 
 The minimum C factor can be estimated from a known average annual C factor using the following equation (Arnold and Williams, 1995):
 
-CUSLE,mn=1.463∗ln⁡[CUSLE,aa]+0.1034C\_{USLE,mn} = 1.463 \* ln⁡[C\_{USLE,aa}] + 0.1034CUSLE,mn​=1.463∗ln⁡[CUSLE,aa​]+0.1034
+$C_{USLE,mn} = 1.463 * ln⁡[C_{USLE,aa}] + 0.1034$
 
-where CUSLE,mnC\_{USLE,mn} CUSLE,mn​ is the minimum C factor for the land cover and CUSLE,aaC\_{USLE,aa} CUSLE,aa​ is the average annual C factor for the land cover.
+where $C_{USLE,mn}$ is the minimum C factor for the land cover and $C_{USLE,aa}$ is the average annual C factor for the land cover.
 
 #### References
 

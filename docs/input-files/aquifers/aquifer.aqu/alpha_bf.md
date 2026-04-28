@@ -6,9 +6,11 @@ The baseflow recession constant is a direct index of groundwater flow response t
 
 It is common to find the baseflow days reported for a stream gage or watershed. This is the number of days for base flow recession to decline through one log cycle. When baseflow days are known, the alpha factor can be calculated:
 
-αgw=1N∗ln⁡[Qgw,NQgw,0]=1BFD∗ln⁡[10]=2.3BFDα\_{gw} = \frac{1}{N} \* ln⁡[\frac{Q\_{gw,N}}{Q\_{gw,0}} ]=\frac{1}{BFD} \* ln⁡[10]=\frac{2.3}{BFD}αgw​=N1​∗ln⁡[Qgw,0​Qgw,N​​]=BFD1​∗ln⁡[10]=BFD2.3​
+$$
+α_{gw} = \frac{1}{N} * ln⁡[\frac{Q_{gw,N}}{Q_{gw,0}} ]=\frac{1}{BFD} * ln⁡[10]=\frac{2.3}{BFD}
+$$
 
-where αgwα\_{gw}αgw​ is the baseflow recession constant, and *BFD* is the number of baseflow days for the watershed.
+where $α_{gw}$ is the baseflow recession constant, and *BFD* is the number of baseflow days for the watershed.
 
 > Smedema, L.K. and D.W. Rycroft. 1983. Land drainage - planning and design of agricultural drainage systems. Cornell University Press, Ithaca, NY.
 

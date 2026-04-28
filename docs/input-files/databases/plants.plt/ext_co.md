@@ -12,11 +12,11 @@ Using the light extinction coefficient value (kℓ) in the Beer-Lambert formula 
 
 To calculate the light extinction coefficient, the amount of photosynthetically active radiation (PAR) intercepted and the mass of aboveground biomass (LAI) is measured several times throughout a plant’s growing season using the methodology described in the previous sections. The light extinction coefficient is then calculated using the Beer-Lambert equation:
 
-TPARPAR=(1−exp⁡(−kl⋅LAI))\frac{TPAR}{PAR}=(1-exp⁡(-k\_l⋅LAI))PARTPAR​=(1−exp⁡(−kl​⋅LAI))
+$\frac{TPAR}{PAR}=(1-exp⁡(-k_l⋅LAI))$
 
 or
 
-kl=−ln⁡(TPARPAR)∗1LAIk\_l=-ln⁡(\frac{TPAR}{PAR}) \* \frac{1}{LAI}kl​=−ln⁡(PARTPAR​)∗LAI1​
+$k_l=-ln⁡(\frac{TPAR}{PAR}) * \frac{1}{LAI}$
 
 where *TPAR* is the transmitted photosynthetically active radiation, and *PAR* is the incoming photosynthetically active radiation.
 

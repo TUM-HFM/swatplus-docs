@@ -4,7 +4,7 @@
 
 SWAT+ is able to read in monthly, yearly, and average annual atmospheric deposition values. Reading in daily values is currently not an option in SWAT+.
 
-The **atmo.cli** file is formatted differently than most other SWAT+ input files and its structure varies slightly depending on the time step of the data. As in all SWAT+ input files, the first line is reserved for user comments. The second line contains the column headers for the third line, which lists basic information about the atmospheric deposition stations.
+The **atmo.cli **file is formatted differently than most other SWAT+ input files and its structure varies slightly depending on the time step of the data. As in all SWAT+ input files, the first line is reserved for user comments. The second line contains the column headers for the third line, which lists basic information about the atmospheric deposition stations.
 
 | Field                                                         | Description                                                              | Type    |
 | ------------------------------------------------------------- | ------------------------------------------------------------------------ | ------- |

@@ -4,8 +4,10 @@
 
 This parameter quantifies the variability in maximum temperature for each month. The standard deviation is calculated as
 
-σmxmon=(∑d=1N∗(Tmx,mon−μmxmon)2N−1)σmx\_{mon}=\sqrt{(\frac{∑\_{d=1}^N\*(T\_{mx,mon}-μmx\_{mon} )^2 }{N-1}})σmxmon​=(N−1∑d=1N​∗(Tmx,mon​−μmxmon​)2​​)
+$$
+σmx_{mon}=\sqrt{(\frac{∑_{d=1}^N*(T_{mx,mon}-μmx_{mon} )^2 }{N-1}})
+$$
 
-where σmxmonσmx\_{mon}σmxmon​is the standard deviation for daily maximum temperature in month monmonmon (ºC), Tmx,monT\_{mx,mon}Tmx,mon​ is the daily maximum temperature on day ddd in month monmonmon (ºC), μmxmonμmx\_{mon}μmxmon​ is the average daily maximum temperature for the month monmonmon (ºC), and NNN is the total number of daily maximum temperature records for month monmonmon.
+where $σmx_{mon}$is the standard deviation for daily maximum temperature in month $mon$ (ºC), $T_{mx,mon}$ is the daily maximum temperature on day $d$ in month $mon$ (ºC), $μmx_{mon}$ is the average daily maximum temperature for the month $mon$ (ºC), and $N$ is the total number of daily maximum temperature records for month $mon$.
 
 Last updated 1 year ago

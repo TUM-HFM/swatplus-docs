@@ -4,8 +4,10 @@
 
 This value is calculated by summing the maximum air temperature for every day in the month for all years of record and dividing the sum by the number of days:
 
-μmxmon=∑d=1N∗Tmx,monNμmx\_{mon}=\frac{∑\_{d=1}^N\*T\_{mx,mon}}{N}μmxmon​=N∑d=1N​∗Tmx,mon​​
+$$
+μmx_{mon}=\frac{∑_{d=1}^N*T_{mx,mon}}{N}
+$$
 
-where μmxmonμmx\_{mon}μmxmon​is the mean daily maximum temperature for the month monmonmon (ºC), Tmx,monT\_{mx,mon}Tmx,mon​ is the daily maximum temperature on day ddd in month monmonmon (ºC), and NNNis the total number of daily maximum temperature records for month monmonmon.
+where $μmx_{mon}$is the mean daily maximum temperature for the month $mon$ (ºC), $T_{mx,mon}$ is the daily maximum temperature on day $d$ in month $mon$ (ºC), and $N$is the total number of daily maximum temperature records for month $mon$.
 
 Last updated 1 year ago

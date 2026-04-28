@@ -50,6 +50,13 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+extra_css: []
 
 # ── Plugins ───────────────────────────────────────────────────────────────────
 plugins:
@@ -61,62 +68,894 @@ plugins:
 # ── Navigation ────────────────────────────────────────────────────────────────
 nav:
   - Introduction:
-    - Overview: index.md
-    - Watershed Configuration: introduction/watershed-configuration.md
-    - Calibration: introduction/calibration.md
-
+      - index.md
+      - Watershed Configuration: introduction/watershed-configuration.md
+      - Calibration: introduction/calibration.md
+      - Basin:
+          - Spatial Objects: introduction/basin/spatial-objects.md
   - Input Files:
-    - File Format: input-files/input-file-format.md
-    - Master File (file.cio): input-files/master-file.md
-    - Simulation Settings: input-files/simulation-settings/index.md
-    - Climate:
-      - Overview: input-files/climate/index.md
-      - weather-sta.cli: input-files/climate/weather-sta-cli.md
-      - weather-wgn.cli: input-files/climate/weather-wgn-cli.md
-      - pcp.cli: input-files/climate/pcp-cli.md
-      - tmp.cli: input-files/climate/tmp-cli.md
-      - hmd.cli: input-files/climate/hmd-cli.md
-      - slr.cli: input-files/climate/slr-cli.md
-      - wnd.cli: input-files/climate/wnd-cli.md
-      - atmo.cli: input-files/climate/atmo-cli.md
-    - Basin: input-files/basin/index.md
-    - Landscape Units: input-files/landscape-units/index.md
-    - Routing Units: input-files/routing-units/index.md
-    - Hydrologic Response Units: input-files/hru/index.md
-    - Hydrology: input-files/hydrology/index.md
-    - Soils: input-files/soils/index.md
-    - Landuse & Management: input-files/landuse-management/index.md
-    - Decision Tables: input-files/decision-tables/index.md
-    - Management Practices: input-files/management-practices/index.md
-    - Structural Practices: input-files/structural-practices/index.md
-    - Databases: input-files/databases/index.md
-    - Aquifers: input-files/aquifers/index.md
-    - GWFlow: input-files/gwflow.md
-    - Channels: input-files/channels/index.md
-    - Reservoirs & Ponds: input-files/reservoirs/index.md
-    - Wetlands: input-files/wetlands/index.md
-    - Initialization: input-files/initialization/index.md
-    - Constituents: input-files/constituents/index.md
-    - Point Sources & Inlets: input-files/point-sources/index.md
-    - Connectivity: input-files/connectivity/index.md
-    - Water Allocation: input-files/water-allocation/index.md
-    - Calibration: input-files/calibration/index.md
-
+      - Simulation Settings:
+          - input-files/simulation-settings/index.md
+          - time.sim:
+              - input-files/simulation-settings/time.sim.md
+              - day_start: input-files/simulation-settings/time.sim/day_start.md
+              - yrc_start: input-files/simulation-settings/time.sim/yrc_start.md
+              - day_end: input-files/simulation-settings/time.sim/day_end.md
+              - yrc_end: input-files/simulation-settings/time.sim/yrc_end.md
+              - step: input-files/simulation-settings/time.sim/step.md
+          - print.prt:
+              - input-files/simulation-settings/print.prt.md
+              - nyskip: input-files/simulation-settings/print.prt/nyskip.md
+              - interval: input-files/simulation-settings/print.prt/interval.md
+              - aa_int_cnt: input-files/simulation-settings/print.prt/aa_int_cnt.md
+              - hydcon: input-files/simulation-settings/print.prt/hydcon.md
+              - object: input-files/simulation-settings/print.prt/object.md
+          - object.prt:
+              - input-files/simulation-settings/object.prt.md
+              - obj_typ: input-files/simulation-settings/object.prt/obj_typ.md
+              - obj_typ_no: input-files/simulation-settings/object.prt/obj_typ_no.md
+              - hyd_typ: input-files/simulation-settings/object.prt/hyd_typ.md
+          - object.cnt: input-files/simulation-settings/object.cnt.md
+          - SWAT+ Documentation: input-files/simulation-settings/constituents.cs.md
+      - Input File Format: input-files/input-file-format.md
+      - Master File (file.cio): input-files/master-file.md
+      - Climate:
+          - input-files/climate/index.md
+          - weather-sta.cli: input-files/climate/weather-sta-cli.md
+          - weather-wgn.cli: input-files/climate/weather-wgn-cli.md
+          - pcp.cli and pcp data files: input-files/climate/pcp-cli.md
+          - tmp.cli and tmp data files: input-files/climate/tmp-cli.md
+          - slr.cli and slr data files: input-files/climate/slr-cli.md
+          - hmd.cli and hmd data files: input-files/climate/hmd-cli.md
+          - wnd.cli and wnd data files: input-files/climate/wnd-cli.md
+          - atmo.cli: input-files/climate/atmo-cli.md
+          - Weather Sta.Cli:
+              - name (weather_sta.cli): input-files/climate/weather-sta.cli/name-weather_sta.cli.md
+              - wgn: input-files/climate/weather-sta.cli/wgn.md
+              - pcp: input-files/climate/weather-sta.cli/pcp.md
+              - tmp: input-files/climate/weather-sta.cli/tmp.md
+              - slr: input-files/climate/weather-sta.cli/slr.md
+              - hmd: input-files/climate/weather-sta.cli/hmd.md
+              - wnd: input-files/climate/weather-sta.cli/wnd.md
+              - pet: input-files/climate/weather-sta.cli/pet.md
+              - atmo_dep: input-files/climate/weather-sta.cli/atmo_dep.md
+          - Weather Wgn.Cli:
+              - name (weather_wgn.cli): input-files/climate/weather-wgn.cli/name-weather_wgn.cli.md
+              - yrs_pcp: input-files/climate/weather-wgn.cli/yrs_pcp.md
+              - tmp_max_ave: input-files/climate/weather-wgn.cli/tmp_max_ave.md
+              - tmp_min_ave: input-files/climate/weather-wgn.cli/tmp_min_ave.md
+              - tmp_max_sd: input-files/climate/weather-wgn.cli/tmp_max_sd.md
+              - tmp_min_sd: input-files/climate/weather-wgn.cli/tmp_min_sd.md
+              - pcp_ave: input-files/climate/weather-wgn.cli/pcp_ave.md
+              - pcp_sd: input-files/climate/weather-wgn.cli/pcp_sd.md
+              - pcp_skew: input-files/climate/weather-wgn.cli/pcp_skew.md
+              - wet_dry: input-files/climate/weather-wgn.cli/wet_dry.md
+              - wet_wet: input-files/climate/weather-wgn.cli/wet_wet.md
+              - pcp_days: input-files/climate/weather-wgn.cli/pcp_days.md
+              - pcp_hhr: input-files/climate/weather-wgn.cli/pcp_hhr.md
+              - slr_ave: input-files/climate/weather-wgn.cli/slr_ave.md
+              - dew_ave: input-files/climate/weather-wgn.cli/dew_ave.md
+              - wnd_ave: input-files/climate/weather-wgn.cli/wnd_ave.md
+          - Atmo.Cli:
+              - timestep: input-files/climate/atmo.cli/timestep.md
+              - num_aa: input-files/climate/atmo.cli/num_aa.md
+      - Basin:
+          - input-files/basin-1/index.md
+          - codes.bsn:
+              - input-files/basin-1/codes.bsn.md
+              - gampt: input-files/basin-1/codes.bsn/abstr_init.md
+              - pet: input-files/basin-1/codes.bsn/pet.md
+              - crack: input-files/basin-1/codes.bsn/crack.md
+              - swift_out: input-files/basin-1/codes.bsn/rtu_wq.md
+              - rte_cha: input-files/basin-1/codes.bsn/rte_cha.md
+              - nostress: input-files/basin-1/codes.bsn/rte_pest.md
+              - carbon: input-files/basin-1/codes.bsn/carbon.md
+              - lapse: input-files/basin-1/codes.bsn/baseflo.md
+              - uhyd: input-files/basin-1/codes.bsn/uhyd.md
+              - tiledrain: input-files/basin-1/codes.bsn/tiledrain.md
+              - wtable: input-files/basin-1/codes.bsn/wtable.md
+              - soil_p: input-files/basin-1/codes.bsn/soil_p.md
+              - qual2e: input-files/basin-1/codes.bsn/qual2e.md
+              - gwflow: input-files/basin-1/codes.bsn/headwater.md
+          - parameters.bsn:
+              - input-files/basin-1/parameters.bsn.md
+              - sw_init: input-files/basin-1/parameters.bsn/sw_init.md
+              - surq_lag: input-files/basin-1/parameters.bsn/surq_lag.md
+              - adj_pkrt: input-files/basin-1/parameters.bsn/adj_pkrt.md
+              - prf: input-files/basin-1/parameters.bsn/adj_pkrt_sed.md
+              - orgn_min: input-files/basin-1/parameters.bsn/orgn_min.md
+              - n_uptake: input-files/basin-1/parameters.bsn/n_uptake.md
+              - p_uptake: input-files/basin-1/parameters.bsn/p_uptake.md
+              - n_perc: input-files/basin-1/parameters.bsn/n_perc.md
+              - p_perc: input-files/basin-1/parameters.bsn/p_perc.md
+              - p_soil: input-files/basin-1/parameters.bsn/p_soil.md
+              - p_avail: input-files/basin-1/parameters.bsn/p_avail.md
+              - rsd_decomp: input-files/basin-1/parameters.bsn/rsd_decomp.md
+              - pest_perc: input-files/basin-1/parameters.bsn/pest_perc.md
+              - msk_co1: input-files/basin-1/parameters.bsn/msk_co1.md
+              - msk_co2: input-files/basin-1/parameters.bsn/msk_co2.md
+              - msk_x: input-files/basin-1/parameters.bsn/msk_x.md
+              - nperco_lchtile: input-files/basin-1/parameters.bsn/trans_loss.md
+              - evap_adj: input-files/basin-1/parameters.bsn/evap_adj.md
+              - denit_exp: input-files/basin-1/parameters.bsn/denit_exp.md
+              - denit_frac: input-files/basin-1/parameters.bsn/denit_frac.md
+              - adj_uhyd: input-files/basin-1/parameters.bsn/adj_uhyd.md
+              - cn_froz: input-files/basin-1/parameters.bsn/cn_froz.md
+              - dorm_hr: input-files/basin-1/parameters.bsn/dorm_hr.md
+              - plaps: input-files/basin-1/parameters.bsn/s_max.md
+              - tlaps: input-files/basin-1/parameters.bsn/n_fix.md
+              - n_fix_max: input-files/basin-1/parameters.bsn/n_fix_max.md
+              - rsd_decay: input-files/basin-1/parameters.bsn/rsd_decay.md
+              - urb_init_abst: input-files/basin-1/parameters.bsn/vel_crit.md
+              - uhyd_alpha: input-files/basin-1/parameters.bsn/uhyd_alpha.md
+              - splash: input-files/basin-1/parameters.bsn/splash.md
+              - rill: input-files/basin-1/parameters.bsn/rill.md
+              - surq_exp: input-files/basin-1/parameters.bsn/surq_exp.md
+              - cov_mgt: input-files/basin-1/parameters.bsn/cov_mgt.md
+              - co2: input-files/basin-1/parameters.bsn/cha_part_sd.md
+      - Landscape Units:
+          - input-files/landscape-units/index.md
+          - ls_unit.ele:
+              - input-files/landscape-units/ls_unit.ele.md
+              - id (ls_unit.ele): input-files/landscape-units/ls_unit.ele/id-ls_unit.ele.md
+              - name (ls_unit.ele): input-files/landscape-units/ls_unit.ele/name-ls_unit.ele.md
+              - obj_typ: input-files/landscape-units/ls_unit.ele/obj_typ.md
+              - obj_typ_no: input-files/landscape-units/ls_unit.ele/obj_typ_no.md
+              - bsn_frac: input-files/landscape-units/ls_unit.ele/bsn_frac.md
+          - ls_unit.def:
+              - input-files/landscape-units/ls_unit.def.md
+              - id (ls_unit.def): input-files/landscape-units/ls_unit.def/id-ls_unit.def.md
+              - name (ls_unit.def): input-files/landscape-units/ls_unit.def/name-ls_unit.def.md
+              - elem_tot: input-files/landscape-units/ls_unit.def/elem_tot.md
+              - elements: input-files/landscape-units/ls_unit.def/elements.md
+      - Routing Units:
+          - input-files/routing-units/index.md
+          - rout_unit.def:
+              - input-files/routing-units/untitled-1.md
+              - id (rout_unit.def): input-files/routing-units/untitled-1/id-rout_unit.def.md
+              - name (rout_unit.def): input-files/routing-units/untitled-1/name-rout_unit.def.md
+              - elem_tot: input-files/routing-units/untitled-1/elem_tot.md
+              - elements: input-files/routing-units/untitled-1/elements.md
+          - rout_unit.ele:
+              - input-files/routing-units/untitled-2.md
+              - id (rout_unit.ele): input-files/routing-units/untitled-2/id-rout_unit.ele.md
+              - name (rout_uni.ele): input-files/routing-units/untitled-2/name-rout_uni.ele.md
+              - obj_typ: input-files/routing-units/untitled-2/obj_typ.md
+              - obj_id: input-files/routing-units/untitled-2/obj_id.md
+          - rout_unit.rtu:
+              - input-files/routing-units/untitled.md
+              - id (rout_unit.rtu): input-files/routing-units/untitled/id-rout_unit.rtu.md
+              - name (rout_unit.rtu): input-files/routing-units/untitled/name-rout_unit.rtu.md
+              - define: input-files/routing-units/untitled/define.md
+              - topo: input-files/routing-units/untitled/topo.md
+              - field: input-files/routing-units/untitled/field.md
+      - Hydrologic Response Units: input-files/hru/index.md
+      - Hydrology:
+          - input-files/hydrology/index.md
+          - hydrology.hyd:
+              - input-files/hydrology/hydrology.hyd.md
+              - name (hydrology.hyd): input-files/hydrology/hydrology.hyd/name.md
+              - lat_time: input-files/hydrology/hydrology.hyd/lat_time.md
+              - lat_sed: input-files/hydrology/hydrology.hyd/lat_sed.md
+              - can_max: input-files/hydrology/hydrology.hyd/can_max.md
+              - esco: input-files/hydrology/hydrology.hyd/esco.md
+              - epco: input-files/hydrology/hydrology.hyd/epco.md
+              - orgn_enrich: input-files/hydrology/hydrology.hyd/orgn_enrich.md
+              - orgp_enrich: input-files/hydrology/hydrology.hyd/orgp_enrich.md
+              - cn3_swf: input-files/hydrology/hydrology.hyd/cn3_swf.md
+              - bio_mix: input-files/hydrology/hydrology.hyd/bio_mix.md
+              - perco: input-files/hydrology/hydrology.hyd/perco.md
+              - lat_orgn: input-files/hydrology/hydrology.hyd/lat_orgn.md
+              - lat_orgp: input-files/hydrology/hydrology.hyd/lat_orgp.md
+              - pet_co: input-files/hydrology/hydrology.hyd/harg_pet.md
+              - latq_co: input-files/hydrology/hydrology.hyd/cn_plntet.md
+          - topography.hyd:
+              - input-files/hydrology/topography.hyd.md
+              - name (topography.hyd): input-files/hydrology/topography.hyd/name.md
+              - slp: input-files/hydrology/topography.hyd/slp.md
+              - slp_len: input-files/hydrology/topography.hyd/slp_len.md
+              - lat_len: input-files/hydrology/topography.hyd/lat_len.md
+              - depos: input-files/hydrology/topography.hyd/depos.md
+          - field.fld:
+              - input-files/hydrology/field.fld.md
+              - name (field.fld): input-files/hydrology/field.fld/name.md
+              - len: input-files/hydrology/field.fld/len.md
+              - wd: input-files/hydrology/field.fld/wd.md
+          - snow.sno:
+              - input-files/hydrology/snow.sno.md
+              - name (snow.sno): input-files/hydrology/snow.sno/name.md
+              - fall_tmp: input-files/hydrology/snow.sno/fall_tmp.md
+              - melt_tmp: input-files/hydrology/snow.sno/melt_tmp.md
+              - melt_max: input-files/hydrology/snow.sno/melt_max.md
+              - melt_min: input-files/hydrology/snow.sno/melt_min.md
+              - tmp_lag: input-files/hydrology/snow.sno/tmp_lag.md
+              - snow_h2o: input-files/hydrology/snow.sno/snow_h2o.md
+              - cov50: input-files/hydrology/snow.sno/cov50.md
+              - snow_init: input-files/hydrology/snow.sno/snow_init.md
+      - Soils:
+          - input-files/soils/index.md
+          - soils.sol:
+              - input-files/soils/soils.sol.md
+              - name (soils.sol): input-files/soils/soils.sol/name-soils.sol.md
+              - hyd_grp: input-files/soils/soils.sol/hyd_grp.md
+              - dp_tot: input-files/soils/soils.sol/dp_tot.md
+              - anion_excl: input-files/soils/soils.sol/anion_excl.md
+              - perc_crk: input-files/soils/soils.sol/perc_crk.md
+              - texture: input-files/soils/soils.sol/texture.md
+              - bd: input-files/soils/soils.sol/bd.md
+              - awc: input-files/soils/soils.sol/awc.md
+              - soil_k: input-files/soils/soils.sol/soil_k.md
+              - carbon: input-files/soils/soils.sol/carbon.md
+              - clay: input-files/soils/soils.sol/clay.md
+              - silt: input-files/soils/soils.sol/silt.md
+              - sand: input-files/soils/soils.sol/sand.md
+              - rock: input-files/soils/soils.sol/rock.md
+              - alb: input-files/soils/soils.sol/alb.md
+              - usle_k: input-files/soils/soils.sol/usle_k.md
+              - ec: input-files/soils/soils.sol/ec.md
+              - caco3: input-files/soils/soils.sol/caco3.md
+              - ph: input-files/soils/soils.sol/ph.md
+          - nutrients.sol:
+              - input-files/soils/nutrients.sol.md
+              - name (nutrients.sol): input-files/soils/nutrients.sol/name-nutrients.sol.md
+              - exp_co: input-files/soils/nutrients.sol/exp_co.md
+              - lab_p: input-files/soils/nutrients.sol/lab_p.md
+              - nitrate: input-files/soils/nutrients.sol/nitrate.md
+              - fr_hum_act: input-files/soils/nutrients.sol/fr_hum_act.md
+              - hum_c_n: input-files/soils/nutrients.sol/hum_c_n.md
+              - hum_c_p: input-files/soils/nutrients.sol/hum_c_p.md
+      - Landuse and Management: input-files/landuse-management/index.md
+      - Decision Tables:
+          - input-files/decision-tables/index.md
+          - '"name".dtl':
+              - input-files/decision-tables/lum.dtl.md
+              - var: input-files/decision-tables/lum.dtl/var.md
+              - obj: input-files/decision-tables/lum.dtl/obj.md
+              - obj_num: input-files/decision-tables/lum.dtl/obj_num.md
+              - lim_var: input-files/decision-tables/lum.dtl/lim_var.md
+              - lim_op: input-files/decision-tables/lum.dtl/lim_op.md
+              - lim_const: input-files/decision-tables/lum.dtl/lim_const.md
+              - alt: input-files/decision-tables/lum.dtl/alt.md
+              - act_typ: input-files/decision-tables/lum.dtl/act_typ.md
+              - obj: input-files/decision-tables/lum.dtl/obj-1.md
+              - obj_num: input-files/decision-tables/lum.dtl/obj_num-1.md
+              - name: input-files/decision-tables/lum.dtl/name.md
+              - option: input-files/decision-tables/lum.dtl/option.md
+              - const: input-files/decision-tables/lum.dtl/const.md
+              - const2: input-files/decision-tables/lum.dtl/const2.md
+              - fp: input-files/decision-tables/lum.dtl/fp.md
+              - outcome: input-files/decision-tables/lum.dtl/outcome.md
+      - Management Practices:
+          - input-files/management-practices/index.md
+          - harv.ops:
+              - input-files/management-practices/harv.ops.md
+              - name (harv.ops): input-files/management-practices/harv.ops/name_harvops.md
+              - harv_typ: input-files/management-practices/harv.ops/harv_typ.md
+              - harv_idx: input-files/management-practices/harv.ops/harv_idx.md
+              - harv_eff: input-files/management-practices/harv.ops/harv_eff.md
+              - harv_bm_min: input-files/management-practices/harv.ops/harv_bm_min.md
+          - graze.ops:
+              - input-files/management-practices/graze.ops.md
+              - name (graze.ops): input-files/management-practices/graze.ops/name_graze.md
+              - fertname: input-files/management-practices/graze.ops/fertnm.md
+              - bm_eat: input-files/management-practices/graze.ops/eat.md
+              - bm_tramp: input-files/management-practices/graze.ops/tramp.md
+              - man_amt: input-files/management-practices/graze.ops/manure.md
+              - grz_bm_min: input-files/management-practices/graze.ops/bio_min.md
+          - irr.ops:
+              - input-files/management-practices/irr.ops.md
+              - name (irr.ops): input-files/management-practices/irr.ops/name_irr.md
+              - irr_eff: input-files/management-practices/irr.ops/irr_eff.md
+              - surq_rto: input-files/management-practices/irr.ops/surq_rto.md
+              - irr_amt: input-files/management-practices/irr.ops/irr_amt.md
+              - irr_dep: input-files/management-practices/irr.ops/irr_dep.md
+              - irr_salt: input-files/management-practices/irr.ops/irr_salt.md
+              - irr_no3n: input-files/management-practices/irr.ops/irr_no3n.md
+              - irr_po4: input-files/management-practices/irr.ops/irr_po4.md
+          - chem_app.ops:
+              - input-files/management-practices/chem_app.ops.md
+              - name (chem_app.ops): input-files/management-practices/chem_app.ops/name_chem.md
+              - app_eff: input-files/management-practices/chem_app.ops/app_eff.md
+              - inject_dp: input-files/management-practices/chem_app.ops/inject_dp.md
+              - surf_frac: input-files/management-practices/chem_app.ops/surf_frac.md
+          - fire.ops:
+              - input-files/management-practices/fire.ops.md
+              - name (fire.ops): input-files/management-practices/fire.ops/name_fire.md
+              - chg_cn2: input-files/management-practices/fire.ops/chg_cn2.md
+              - frac_burn: input-files/management-practices/fire.ops/frac_burn.md
+          - sweep.ops:
+              - input-files/management-practices/sweep.ops.md
+              - name (sweep.ops): input-files/management-practices/sweep.ops/name_sweep.md
+              - swp_eff: input-files/management-practices/sweep.ops/swp_eff.md
+              - frac_curb: input-files/management-practices/sweep.ops/frac_curb.md
+      - Structural Practices:
+          - input-files/structural-practices/index.md
+          - tiledrain.str:
+              - input-files/structural-practices/tiledrain.str.md
+              - name (tiledrain.str): input-files/structural-practices/tiledrain.str/name_tiledb.md
+              - dp: input-files/structural-practices/tiledrain.str/dp.md
+              - t_fc: input-files/structural-practices/tiledrain.str/t_fc.md
+              - lag: input-files/structural-practices/tiledrain.str/lag.md
+              - rad: input-files/structural-practices/tiledrain.str/rad.md
+              - dist: input-files/structural-practices/tiledrain.str/dist.md
+              - drain: input-files/structural-practices/tiledrain.str/drain.md
+              - pump: input-files/structural-practices/tiledrain.str/pump.md
+              - lat_ksat: input-files/structural-practices/tiledrain.str/lat_ksat.md
+          - septic.str:
+              - input-files/structural-practices/septic.str.md
+              - name (septic.str): input-files/structural-practices/septic.str/name_sepdb.md
+              - typ: input-files/structural-practices/septic.str/typ.md
+              - yr: input-files/structural-practices/septic.str/yr.md
+              - operation: input-files/structural-practices/septic.str/operation.md
+              - residents: input-files/structural-practices/septic.str/residents.md
+              - area: input-files/structural-practices/septic.str/area.md
+              - t_fail: input-files/structural-practices/septic.str/t_fail.md
+              - dp_bioz: input-files/structural-practices/septic.str/dp_bioz.md
+              - thk_bioz: input-files/structural-practices/septic.str/thk_bioz.md
+              - cha_dist: input-files/structural-practices/septic.str/cha_dist.md
+              - sep_dens: input-files/structural-practices/septic.str/sep_dens.md
+              - bm_dens: input-files/structural-practices/septic.str/bm_dens.md
+              - bod_decay: input-files/structural-practices/septic.str/bod_decay.md
+              - bod_conv: input-files/structural-practices/septic.str/bod_conv.md
+              - fc_lin: input-files/structural-practices/septic.str/fc_lin.md
+              - fc_exp: input-files/structural-practices/septic.str/fc_exp.md
+              - fecal_decay: input-files/structural-practices/septic.str/fecal_decay.md
+              - tds_conv: input-files/structural-practices/septic.str/tds_conv.md
+              - mort: input-files/structural-practices/septic.str/mort.md
+              - resp: input-files/structural-practices/septic.str/resp.md
+              - slough1: input-files/structural-practices/septic.str/slough1.md
+              - slough2: input-files/structural-practices/septic.str/slough2.md
+              - nit: input-files/structural-practices/septic.str/nit.md
+              - denit: input-files/structural-practices/septic.str/denit.md
+              - p_sorp: input-files/structural-practices/septic.str/p_sorp.md
+              - p_sorp_max: input-files/structural-practices/septic.str/p_sorp_max.md
+              - solp_slp: input-files/structural-practices/septic.str/solp_slp.md
+              - solp_int: input-files/structural-practices/septic.str/solp_init.md
+          - filterstrip.str:
+              - input-files/structural-practices/filterstrip.str.md
+              - name (filterstrip.str): input-files/structural-practices/filterstrip.str/name_fsdb.md
+              - fld_vfs: input-files/structural-practices/filterstrip.str/fld_vfs.md
+              - con_vfs: input-files/structural-practices/filterstrip.str/con_vfs.md
+              - cha_q: input-files/structural-practices/filterstrip.str/cha_q.md
+          - grassedww.str:
+              - input-files/structural-practices/grassedww.str.md
+              - name (grassedww.str): input-files/structural-practices/grassedww.str/name_grwdb.md
+              - mann: input-files/structural-practices/grassedww.str/mann.md
+              - sed_co: input-files/structural-practices/grassedww.str/sed_co.md
+              - dp: input-files/structural-practices/grassedww.str/dp.md
+              - wd: input-files/structural-practices/grassedww.str/wd.md
+              - len: input-files/structural-practices/grassedww.str/len.md
+              - slp: input-files/structural-practices/grassedww.str/slp.md
+          - bmpuser.str:
+              - input-files/structural-practices/bmpuser.str.md
+              - name (bmpuser.str): input-files/structural-practices/bmpuser.str/name_bmpdb.md
+              - sed_eff: input-files/structural-practices/bmpuser.str/sed_eff.md
+              - ptlp_eff: input-files/structural-practices/bmpuser.str/ptlp_eff.md
+              - solp_eff: input-files/structural-practices/bmpuser.str/solp_eff.md
+              - ptln_eff: input-files/structural-practices/bmpuser.str/ptln_eff.md
+              - soln_eff: input-files/structural-practices/bmpuser.str/soln_eff.md
+              - bact_eff: input-files/structural-practices/bmpuser.str/bact_eff.md
+      - Databases:
+          - input-files/databases/index.md
+          - plants.plt:
+              - input-files/databases/plants.plt.md
+              - name (plants.plt): input-files/databases/plants.plt/untitled.md
+              - plnt_typ: input-files/databases/plants.plt/untitled-21.md
+              - gro_trig: input-files/databases/plants.plt/untitled-20.md
+              - nfix_co: input-files/databases/plants.plt/untitled-19.md
+              - days_mat: input-files/databases/plants.plt/untitled-18.md
+              - bm_e: input-files/databases/plants.plt/untitled-17.md
+              - harv_idx: input-files/databases/plants.plt/untitled-16.md
+              - lai_pot: input-files/databases/plants.plt/untitled-15.md
+              - frac_hu1: input-files/databases/plants.plt/untitled-14.md
+              - lai_max1: input-files/databases/plants.plt/untitled-13.md
+              - frac_hu2: input-files/databases/plants.plt/untitled-12.md
+              - lai_max2: input-files/databases/plants.plt/untitled-11.md
+              - hu_lai_decl: input-files/databases/plants.plt/untitled-10.md
+              - dlai_rate: input-files/databases/plants.plt/untitled-9.md
+              - can_ht_max: input-files/databases/plants.plt/untitled-8.md
+              - rt_dp_max: input-files/databases/plants.plt/untitled-7.md
+              - tmp_opt: input-files/databases/plants.plt/untitled-6.md
+              - tmp_base: input-files/databases/plants.plt/tmp_base.md
+              - frac_n_yld: input-files/databases/plants.plt/frac_n_yld.md
+              - frac_p_yld: input-files/databases/plants.plt/frac_p_yld.md
+              - frac_n_em: input-files/databases/plants.plt/frac_n_em.md
+              - frac_n_50: input-files/databases/plants.plt/frac_n_50.md
+              - frac_n_mat: input-files/databases/plants.plt/frac_n_mat.md
+              - frac_p_em: input-files/databases/plants.plt/frac_p_em.md
+              - frac_p_50: input-files/databases/plants.plt/frac_p_50.md
+              - frac_p_mat: input-files/databases/plants.plt/frac_p_mat.md
+              - harv_idx_ws: input-files/databases/plants.plt/harv_idx_ws.md
+              - usle_c_min: input-files/databases/plants.plt/usle_c_min.md
+              - stcon_max: input-files/databases/plants.plt/stcon_max.md
+              - vpd: input-files/databases/plants.plt/vpd.md
+              - frac_stcon: input-files/databases/plants.plt/frac_stcon.md
+              - ru_vpd: input-files/databases/plants.plt/ru_vpd.md
+              - co2_hi: input-files/databases/plants.plt/co2_hi.md
+              - bm_e_hi: input-files/databases/plants.plt/bm_e_hi.md
+              - plnt_decomp: input-files/databases/plants.plt/plnt_decomp.md
+              - lai_min: input-files/databases/plants.plt/lai_min.md
+              - bm_tree_acc: input-files/databases/plants.plt/bm_tree_acc.md
+              - yrs_mat: input-files/databases/plants.plt/yrs_mat.md
+              - bm_tree_max: input-files/databases/plants.plt/bm_tree_max.md
+              - ext_co: input-files/databases/plants.plt/ext_co.md
+              - leaf_tov_min: input-files/databases/plants.plt/leaf_tov_min.md
+              - leaf_tov_max: input-files/databases/plants.plt/leaf_tov_max.md
+              - bm_dieoff: input-files/databases/plants.plt/bm_dieoff.md
+              - rt_st_beg: input-files/databases/plants.plt/rt_st_beg.md
+              - rt_st_end: input-files/databases/plants.plt/rt_st_end.md
+              - plnt_pop1: input-files/databases/plants.plt/plnt_pop1.md
+              - frac_lai1: input-files/databases/plants.plt/frac_la1.md
+              - plnt_pop2: input-files/databases/plants.plt/plnt_pop2.md
+              - frac_lai2: input-files/databases/plants.plt/frac_lai2.md
+              - frac_sw_gro: input-files/databases/plants.plt/untitled-5.md
+              - aeration: input-files/databases/plants.plt/untitled-4.md
+              - rsd_pctcov: input-files/databases/plants.plt/untitled-3.md
+              - rsd_covfac: input-files/databases/plants.plt/untitled-2.md
+          - fertilizer.frt:
+              - input-files/databases/fertilizer.frt.md
+              - name (fertilizer.frt): input-files/databases/fertilizer.frt/name_fertdb.md
+              - min_n: input-files/databases/fertilizer.frt/min_n.md
+              - min_p: input-files/databases/fertilizer.frt/min_p.md
+              - org_n: input-files/databases/fertilizer.frt/org_n.md
+              - org_p: input-files/databases/fertilizer.frt/org_p.md
+              - nh3_n: input-files/databases/fertilizer.frt/nh3_n.md
+          - tillage.til:
+              - input-files/databases/tillage.til.md
+              - name (tillage.til): input-files/databases/tillage.til/name_tilldb.md
+              - mix_eff: input-files/databases/tillage.til/mix_eff.md
+              - mix_dp: input-files/databases/tillage.til/mix_dp.md
+          - pesticide.pes:
+              - input-files/databases/pesticide.pes.md
+              - name (pesticide.pes): input-files/databases/pesticide.pes/name_pestdb.md
+              - soil_ads: input-files/databases/pesticide.pes/soil_ads.md
+              - frac_wash: input-files/databases/pesticide.pes/frac_wash.md
+              - hl_foliage: input-files/databases/pesticide.pes/hl_foliage.md
+              - hl_soil: input-files/databases/pesticide.pes/hl_soil.md
+              - solub: input-files/databases/pesticide.pes/solub.md
+              - aq_reac: input-files/databases/pesticide.pes/aq_reac.md
+              - aq_volat: input-files/databases/pesticide.pes/aq_volat.md
+              - mol_wt: input-files/databases/pesticide.pes/mol_wt.md
+              - aq_resus: input-files/databases/pesticide.pes/aq_resus.md
+              - aq_settle: input-files/databases/pesticide.pes/aq_settle.md
+              - ben_act_dep: input-files/databases/pesticide.pes/ben_act_dep.md
+              - ben_bury: input-files/databases/pesticide.pes/ben_bury.md
+              - ben_reac: input-files/databases/pesticide.pes/ben_reac.md
+          - urban.urb:
+              - input-files/databases/urban.urb.md
+              - name (urban.urb): input-files/databases/urban.urb/name_urbdb.md
+              - frac_imp: input-files/databases/urban.urb/frac_imp.md
+              - frac_dc_imp: input-files/databases/urban.urb/frac_dc_imp.md
+              - curb_den: input-files/databases/urban.urb/curb_den.md
+              - urb_wash: input-files/databases/urban.urb/urb_wash.md
+              - dirt_max: input-files/databases/urban.urb/dirt_max.md
+              - t_halfmax: input-files/databases/urban.urb/t_halfmax.md
+              - conc_totn: input-files/databases/urban.urb/conc_totn.md
+              - conc_totp: input-files/databases/urban.urb/conc_totp.md
+              - conc_no3: input-files/databases/urban.urb/conc_no3.md
+              - urb_cn: input-files/databases/urban.urb/urb_cn.md
+          - septic.sep:
+              - input-files/databases/septic.sep.md
+              - name (septic.sep): input-files/databases/septic.sep/name_sepdb.md
+              - q_rate: input-files/databases/septic.sep/q_rate.md
+              - bod: input-files/databases/septic.sep/bod.md
+              - tss: input-files/databases/septic.sep/tss.md
+              - nh4_n: input-files/databases/septic.sep/nh4_n.md
+              - no3_n: input-files/databases/septic.sep/no3_n.md
+              - no2_n: input-files/databases/septic.sep/no2_n.md
+              - org_n: input-files/databases/septic.sep/org_n.md
+              - min_p: input-files/databases/septic.sep/min_p.md
+              - org_p: input-files/databases/septic.sep/org_p.md
+              - fcoli: input-files/databases/septic.sep/fcoli.md
+      - Aquifers:
+          - input-files/aquifers/index.md
+          - initial.aqu:
+              - input-files/aquifers/initial.aqu.md
+              - name (initial.aqu): input-files/aquifers/initial.aqu/name.md
+              - org_min: input-files/aquifers/initial.aqu/org_min.md
+              - pest: input-files/aquifers/initial.aqu/pest.md
+              - path: input-files/aquifers/initial.aqu/path.md
+              - hmet: input-files/aquifers/initial.aqu/hmet.md
+              - salt: input-files/aquifers/initial.aqu/salt.md
+          - aquifer.aqu:
+              - input-files/aquifers/aquifer.aqu.md
+              - id (aquifer.aqu): input-files/aquifers/aquifer.aqu/id-aquifer.aqu.md
+              - name (aquifer.aqu): input-files/aquifers/aquifer.aqu/name.md
+              - aqu_init: input-files/aquifers/aquifer.aqu/aqu_ini.md
+              - gw_flo: input-files/aquifers/aquifer.aqu/gw_flo.md
+              - dep_bot: input-files/aquifers/aquifer.aqu/dep_bot.md
+              - dep_wt: input-files/aquifers/aquifer.aqu/dep_wt-1.md
+              - no3_n: input-files/aquifers/aquifer.aqu/no3_n.md
+              - sol_p: input-files/aquifers/aquifer.aqu/sol_p.md
+              - carbon: input-files/aquifers/aquifer.aqu/ptl_n.md
+              - flo_dist: input-files/aquifers/aquifer.aqu/ptl_p.md
+              - flo_max: input-files/aquifers/aquifer.aqu/flo_max.md
+              - alpha_bf: input-files/aquifers/aquifer.aqu/alpha_bf.md
+              - revap: input-files/aquifers/aquifer.aqu/revap.md
+              - rchg_dp: input-files/aquifers/aquifer.aqu/rchg_dp.md
+              - spec_yld: input-files/aquifers/aquifer.aqu/spec_yld.md
+              - hl_no3n: input-files/aquifers/aquifer.aqu/hl_no3n.md
+              - flo_min: input-files/aquifers/aquifer.aqu/flo_min.md
+              - revap_min: input-files/aquifers/aquifer.aqu/revap_min.md
+      - GWFlow: input-files/gwflow.md
+      - Channels:
+          - input-files/channels/index.md
+          - initial.cha:
+              - input-files/channels/initial.cha.md
+              - name (initial.cha): input-files/channels/initial.cha/name.md
+              - org_min: input-files/channels/initial.cha/ch_org_min.md
+              - pest: input-files/channels/initial.cha/ch_pest.md
+              - salt: input-files/channels/initial.cha/ch_salt.md
+          - nutrients.cha:
+              - input-files/channels/nutrients.cha.md
+              - name (nutrients.cha): input-files/channels/nutrients.cha/name.md
+              - plt_n: input-files/channels/nutrients.cha/plt_n.md
+              - plt_p: input-files/channels/nutrients.cha/plt_p.md
+              - alg_stl: input-files/channels/nutrients.cha/alg_stl.md
+              - ben_disp: input-files/channels/nutrients.cha/ben_disp.md
+              - ben_nh3n: input-files/channels/nutrients.cha/ben_nh3n.md
+              - ptln_stl: input-files/channels/nutrients.cha/ptln_stl.md
+              - ptlp_stl: input-files/channels/nutrients.cha/ptlp_stl.md
+              - cst_stl: input-files/channels/nutrients.cha/cst_stl.md
+              - ben_cst: input-files/channels/nutrients.cha/ben_cst.md
+              - cbn_bod_co: input-files/channels/nutrients.cha/cbn_bod_co.md
+              - air_rt: input-files/channels/nutrients.cha/air_rt.md
+              - cbn_bod_stl: input-files/channels/nutrients.cha/cbn_bod_stl.md
+              - ben_bod: input-files/channels/nutrients.cha/ben_bod.md
+              - bact_die: input-files/channels/nutrients.cha/bact_die.md
+              - cst_decay: input-files/channels/nutrients.cha/cst_decay.md
+              - nh3n_no2n: input-files/channels/nutrients.cha/nh3n_no2n.md
+              - no2n_no3n: input-files/channels/nutrients.cha/no2n_no3n.md
+              - ptln_nh3n: input-files/channels/nutrients.cha/ptln_nh3n.md
+              - ptlp_solp: input-files/channels/nutrients.cha/ptlp_solp.md
+              - q2e_lt: input-files/channels/nutrients.cha/q2e_lt.md
+              - q2e_alg: input-files/channels/nutrients.cha/q2e_alg.md
+              - chla_alg: input-files/channels/nutrients.cha/chla_alg.md
+              - alg_n: input-files/channels/nutrients.cha/alg_n.md
+              - alg_p: input-files/channels/nutrients.cha/alg_p.md
+              - alg_o2_prod: input-files/channels/nutrients.cha/alg_o2_prod.md
+              - alg_o2_resp: input-files/channels/nutrients.cha/alg_o2_resp.md
+              - o2_nh3n: input-files/channels/nutrients.cha/o2_nh3n.md
+              - o2_no2n: input-files/channels/nutrients.cha/o2_no2n.md
+              - alg_grow: input-files/channels/nutrients.cha/alg_grow.md
+              - alg_resp: input-files/channels/nutrients.cha/alg_resp.md
+              - slr_act: input-files/channels/nutrients.cha/slr_act.md
+              - lt_co: input-files/channels/nutrients.cha/lt_co.md
+              - const_n: input-files/channels/nutrients.cha/const_n.md
+              - const_p: input-files/channels/nutrients.cha/const_p.md
+              - lt_nonalg: input-files/channels/nutrients.cha/lt_nonalg.md
+              - alg_shd_l: input-files/channels/nutrients.cha/alg_shd_l.md
+              - alg_shd_nl: input-files/channels/nutrients.cha/alg_shd_nl.md
+              - nh3_pref: input-files/channels/nutrients.cha/nh3_pref.md
+          - channel-lte.cha:
+              - input-files/channels/channel-lte.cha.md
+              - id (channel-lte.cha): input-files/channels/channel-lte.cha/id-channel-lte.cha.md
+              - name (channel-lte.cha): input-files/channels/channel-lte.cha/name.md
+              - ini: input-files/channels/channel-lte.cha/cha_ini.md
+              - hyd: input-files/channels/channel-lte.cha/cha_hyd.md
+              - nut: input-files/channels/channel-lte.cha/cha_nut.md
+          - hyd-sed-lte.cha:
+              - input-files/channels/hyd-sed-lte.cha.md
+              - name (hyd-sed-lte.cha): input-files/channels/hyd-sed-lte.cha/name.md
+              - wd: input-files/channels/hyd-sed-lte.cha/wd.md
+              - dp: input-files/channels/hyd-sed-lte.cha/dp.md
+              - slp: input-files/channels/hyd-sed-lte.cha/slp.md
+              - len: input-files/channels/hyd-sed-lte.cha/len.md
+              - mann: input-files/channels/hyd-sed-lte.cha/mann.md
+              - k: input-files/channels/hyd-sed-lte.cha/k.md
+              - erod_fact: input-files/channels/hyd-sed-lte.cha/erod_fact.md
+              - cov_fact: input-files/channels/hyd-sed-lte.cha/cov_fact.md
+              - sinu: input-files/channels/hyd-sed-lte.cha/wd_rto.md
+              - eq_slp: input-files/channels/hyd-sed-lte.cha/eq_slp.md
+              - d50: input-files/channels/hyd-sed-lte.cha/d50.md
+              - clay: input-files/channels/hyd-sed-lte.cha/clay.md
+              - carbon: input-files/channels/hyd-sed-lte.cha/carbon.md
+              - dry_bd: input-files/channels/hyd-sed-lte.cha/dry_bd.md
+              - side_slp: input-files/channels/hyd-sed-lte.cha/side_slp.md
+              - bed_load: input-files/channels/hyd-sed-lte.cha/bed_load.md
+              - fps: input-files/channels/hyd-sed-lte.cha/fps.md
+              - fpn: input-files/channels/hyd-sed-lte.cha/fpn.md
+              - n_conc: input-files/channels/hyd-sed-lte.cha/hc_erod.md
+              - p_conc: input-files/channels/hyd-sed-lte.cha/hc_ht.md
+              - p_bio: input-files/channels/hyd-sed-lte.cha/hc_len.md
+      - Reservoirs and Ponds:
+          - input-files/reservoirs/index.md
+          - initial.res:
+              - input-files/reservoirs/initial.res.md
+              - name (initial.res): input-files/reservoirs/initial.res/name.md
+              - org_min: input-files/reservoirs/initial.res/res_org_min.md
+              - pest: input-files/reservoirs/initial.res/res_pest.md
+              - salt: input-files/reservoirs/initial.res/res_salt.md
+          - reservoir.res:
+              - input-files/reservoirs/reservoir.res.md
+              - id (reservoir.res): input-files/reservoirs/reservoir.res/id-reservoir.res.md
+              - name (reservoir.res): input-files/reservoirs/reservoir.res/name.md
+              - init: input-files/reservoirs/reservoir.res/init.md
+              - hyd: input-files/reservoirs/reservoir.res/hyd.md
+              - rel: input-files/reservoirs/reservoir.res/rel.md
+              - sed: input-files/reservoirs/reservoir.res/sed.md
+              - nut: input-files/reservoirs/reservoir.res/nut.md
+          - hydrology.res:
+              - input-files/reservoirs/hydrology.res.md
+              - name (hydrology.res): input-files/reservoirs/hydrology.res/name.md
+              - yr_op: input-files/reservoirs/hydrology.res/yr_op.md
+              - mon_op: input-files/reservoirs/hydrology.res/mon_op.md
+              - area_ps: input-files/reservoirs/hydrology.res/area_ps.md
+              - vol_ps: input-files/reservoirs/hydrology.res/vol_ps.md
+              - area_es: input-files/reservoirs/hydrology.res/area_es.md
+              - vol_es: input-files/reservoirs/hydrology.res/vol_es-1.md
+              - k: input-files/reservoirs/hydrology.res/k.md
+              - evap_co: input-files/reservoirs/hydrology.res/evap_co.md
+              - shp_co1: input-files/reservoirs/hydrology.res/shp_co1.md
+              - shp_co2: input-files/reservoirs/hydrology.res/sho_co2.md
+          - sediment.res:
+              - input-files/reservoirs/sediment.res.md
+              - name (sediment.res): input-files/reservoirs/sediment.res/name.md
+              - nsed: input-files/reservoirs/sediment.res/nsed.md
+              - d50: input-files/reservoirs/sediment.res/d50.md
+              - carbon: input-files/reservoirs/sediment.res/carbon.md
+              - bd: input-files/reservoirs/sediment.res/bd.md
+              - sed_stl: input-files/reservoirs/sediment.res/sed_stl.md
+              - stl_vel: input-files/reservoirs/sediment.res/stl_vel.md
+          - nutrients.res:
+              - input-files/reservoirs/nutrients.res.md
+              - name (nutrients.res): input-files/reservoirs/nutrients.res/untitled.md
+              - mid_start: input-files/reservoirs/nutrients.res/untitled-7.md
+              - mid_end: input-files/reservoirs/nutrients.res/untitled-6.md
+              - mid_n_stl: input-files/reservoirs/nutrients.res/untitled-5.md
+              - n_stl: input-files/reservoirs/nutrients.res/untitled-4.md
+              - mid_p_stl: input-files/reservoirs/nutrients.res/untitled-3.md
+              - p_stl: input-files/reservoirs/nutrients.res/untitled-2.md
+              - chla_co: input-files/reservoirs/nutrients.res/untitled-1.md
+              - secchi_co: input-files/reservoirs/nutrients.res/secchi_co.md
+              - theta_n: input-files/reservoirs/nutrients.res/theta_n.md
+              - theta_p: input-files/reservoirs/nutrients.res/theta_p.md
+              - n_min_stl: input-files/reservoirs/nutrients.res/n_min_stl.md
+              - p_min_stl: input-files/reservoirs/nutrients.res/p_min_stl.md
+          - weir.res:
+              - input-files/reservoirs/weir.res.md
+              - name (weir.res): input-files/reservoirs/weir.res/name.md
+              - linear_c: input-files/reservoirs/weir.res/disch_co.md
+              - exp_k: input-files/reservoirs/weir.res/energy_co.md
+              - width: input-files/reservoirs/weir.res/weir_wd.md
+              - height: input-files/reservoirs/weir.res/vel_co.md
+      - Wetlands:
+          - input-files/wetlands/index.md
+          - wetland.wet:
+              - input-files/wetlands/wetland.wet.md
+              - id (wetland.wet): input-files/wetlands/wetland.wet/numb.md
+              - name (wetland.wet): input-files/wetlands/wetland.wet/name.md
+              - init: input-files/wetlands/wetland.wet/init.md
+              - hyd: input-files/wetlands/wetland.wet/hyd.md
+              - rel: input-files/wetlands/wetland.wet/rel.md
+              - sed: input-files/wetlands/wetland.wet/sed.md
+              - nut: input-files/wetlands/wetland.wet/nut.md
+          - hydrology.wet:
+              - input-files/wetlands/hydrology.wet.md
+              - name (hydrology.wet): input-files/wetlands/hydrology.wet/name.md
+              - hru_ps: input-files/wetlands/hydrology.wet/hru_ps.md
+              - dp_ps: input-files/wetlands/hydrology.wet/dp_ps.md
+              - hru_es: input-files/wetlands/hydrology.wet/hru_es.md
+              - dp_es: input-files/wetlands/hydrology.wet/dp_es.md
+              - k: input-files/wetlands/hydrology.wet/k.md
+              - evap: input-files/wetlands/hydrology.wet/evap.md
+              - vol_area_co: input-files/wetlands/hydrology.wet/vol_area_co.md
+              - vol_dp_a: input-files/wetlands/hydrology.wet/vol_dp_a.md
+              - vol_dp_b: input-files/wetlands/hydrology.wet/vol_dp_b.md
+              - hru_frac: input-files/wetlands/hydrology.wet/hru_frac.md
+      - Initialization:
+          - input-files/initialization/index.md
+          - soil_plant.ini:
+              - input-files/initialization/soil_plant.ini.md
+              - name (soil_plant.ini): input-files/initialization/soil_plant.ini/name-soil_plant.ini.md
+              - sw_frac: input-files/initialization/soil_plant.ini/sw_frac.md
+              - nutrients: input-files/initialization/soil_plant.ini/nutrients.md
+              - pest: input-files/initialization/soil_plant.ini/pest.md
+              - salt: input-files/initialization/soil_plant.ini/salt.md
+          - pest_hru.ini: input-files/initialization/pest_hru.ini.md
+          - salt_hru.ini: input-files/initialization/salt_hru.ini.md
+          - om_water.ini:
+              - input-files/initialization/om_water.ini.md
+              - name (om_water.ini): input-files/initialization/om_water.ini/name.md
+              - vol: input-files/initialization/om_water.ini/vol.md
+              - sed: input-files/initialization/om_water.ini/sed.md
+              - part_n: input-files/initialization/om_water.ini/part_n.md
+              - part_p: input-files/initialization/om_water.ini/part_p.md
+              - no3: input-files/initialization/om_water.ini/no3.md
+              - solp: input-files/initialization/om_water.ini/solp.md
+              - chl_a: input-files/initialization/om_water.ini/chl_a.md
+              - nh3: input-files/initialization/om_water.ini/nh3.md
+              - no2: input-files/initialization/om_water.ini/no2.md
+              - cbn_bod: input-files/initialization/om_water.ini/cbn_bod.md
+              - dis_ox: input-files/initialization/om_water.ini/dis_ox.md
+              - sand: input-files/initialization/om_water.ini/sand.md
+              - silt: input-files/initialization/om_water.ini/silt.md
+              - clay: input-files/initialization/om_water.ini/clay.md
+              - sm_ag: input-files/initialization/om_water.ini/sm_ag.md
+              - l_ag: input-files/initialization/om_water.ini/l_ag.md
+              - gvl: input-files/initialization/om_water.ini/gvl.md
+              - tmp: input-files/initialization/om_water.ini/tmp.md
+          - pest_water.ini: input-files/initialization/pest_water.ini.md
+          - salt_water.ini: input-files/initialization/salt_water.ini.md
+      - Constituents:
+          - input-files/constituents/index.md
+          - constituents.cs: input-files/constituents/constituents.cs.md
+      - Point Sources and Inlets: input-files/point-sources/index.md
+      - Connectivity:
+          - input-files/connectivity/index.md
+          - '''object''.con':
+              - input-files/connectivity/hru.con.md
+              - id: input-files/connectivity/hru.con/id.md
+              - name: input-files/connectivity/hru.con/name.md
+              - gis_id: input-files/connectivity/hru.con/gis_id.md
+              - area: input-files/connectivity/hru.con/area.md
+              - lat: input-files/connectivity/hru.con/lat.md
+              - lon: input-files/connectivity/hru.con/long.md
+              - elev: input-files/connectivity/hru.con/elev.md
+              - '''obj''': input-files/connectivity/hru.con/hru.md
+              - wst: input-files/connectivity/hru.con/wst.md
+              - cst: input-files/connectivity/hru.con/cst.md
+              - ovfl: input-files/connectivity/hru.con/ovfl.md
+              - rule: input-files/connectivity/hru.con/rule.md
+              - out_tot: input-files/connectivity/hru.con/out_tot.md
+              - obj_typ: input-files/connectivity/hru.con/obj_typ.md
+              - obj_id: input-files/connectivity/hru.con/obj_id.md
+              - hyd_typ: input-files/connectivity/hru.con/hyd_typ.md
+              - frac: input-files/connectivity/hru.con/frac.md
+          - aqu_cha.lin: input-files/connectivity/aqu_cha.lin.md
+          - chan_surf.lin: input-files/connectivity/chan_surf.lin.md
+      - Water Allocation:
+          - input-files/water-allocation/index.md
+          - water_allocation.wro:
+              - input-files/water-allocation/water_allocation.wro.md
+              - rule_typ: input-files/water-allocation/water_allocation.wro/rule_typ.md
+              - cha_ob: input-files/water-allocation/water_allocation.wro/cha_ob.md
+              - ob_typ (source): input-files/water-allocation/water_allocation.wro/ob_typ-source.md
+              - limit_mon: input-files/water-allocation/water_allocation.wro/limit_mon.md
+              - ob_typ (demand): input-files/water-allocation/water_allocation.wro/ob_typ-demand.md
+              - withdr: input-files/water-allocation/water_allocation.wro/withdr.md
+              - amount: input-files/water-allocation/water_allocation.wro/amount.md
+              - right: input-files/water-allocation/water_allocation.wro/right.md
+              - rcv_ob: input-files/water-allocation/water_allocation.wro/rcv_ob.md
+              - rcv_num: input-files/water-allocation/water_allocation.wro/rcv_num.md
+              - srcs: input-files/water-allocation/water_allocation.wro/srcs.md
+              - src: input-files/water-allocation/water_allocation.wro/src.md
+              - frac: input-files/water-allocation/water_allocation.wro/frac.md
+              - comp: input-files/water-allocation/water_allocation.wro/comp.md
+      - Calibration:
+          - input-files/calibration/index.md
+          - codes.sft: input-files/calibration/codes.sft.md
+          - wb_parms.sft: input-files/calibration/wb_parms.sft.md
+          - water_balance.sft: input-files/calibration/water_balance.sft.md
+          - cal_parms.cal: input-files/calibration/cal_parms.cal.md
+          - calibration.cal: input-files/calibration/calibration.cal.md
+      - Hydrologic Response Units:
+          - hru-data.hru:
+              - input-files/hydrologic-response-units/hru-data.hru.md
+              - id (hru-data.hru): input-files/hydrologic-response-units/hru-data.hru/id-hru-data.hru.md
+              - name (hru-data.hru): input-files/hydrologic-response-units/hru-data.hru/name_hru.md
+              - topo: input-files/hydrologic-response-units/hru-data.hru/topo.md
+              - hydro: input-files/hydrologic-response-units/hru-data.hru/hydro.md
+              - soil: input-files/hydrologic-response-units/hru-data.hru/soil.md
+              - lu_mgt: input-files/hydrologic-response-units/hru-data.hru/lu_mgt.md
+              - soil_plant_init: input-files/hydrologic-response-units/hru-data.hru/soil_ini.md
+              - surf_stor: input-files/hydrologic-response-units/hru-data.hru/surf_stor.md
+              - snow: input-files/hydrologic-response-units/hru-data.hru/snow.md
+              - field: input-files/hydrologic-response-units/hru-data.hru/field.md
+          - hru-lte.hru:
+              - input-files/hydrologic-response-units/hru-lte.hru.md
+              - id (hru-lte.hru): input-files/hydrologic-response-units/hru-lte.hru/id-hru-lte.hru.md
+              - name (hru-lte.hru): input-files/hydrologic-response-units/hru-lte.hru/name_hrulte_db.md
+              - area: input-files/hydrologic-response-units/hru-lte.hru/area.md
+              - cn2: input-files/hydrologic-response-units/hru-lte.hru/cn2.md
+              - cn3_swf: input-files/hydrologic-response-units/hru-lte.hru/cn3_swf.md
+              - t_conc: input-files/hydrologic-response-units/hru-lte.hru/t_conc.md
+              - soil_dp: input-files/hydrologic-response-units/hru-lte.hru/soil_dp.md
+              - perco_co: input-files/hydrologic-response-units/hru-lte.hru/perco_co.md
+              - slp: input-files/hydrologic-response-units/hru-lte.hru/slp.md
+              - slp_len: input-files/hydrologic-response-units/hru-lte.hru/slp_len.md
+              - et_co: input-files/hydrologic-response-units/hru-lte.hru/et_co.md
+              - aqu_sp_yld: input-files/hydrologic-response-units/hru-lte.hru/aqu_sp_yld.md
+              - alpha_bf: input-files/hydrologic-response-units/hru-lte.hru/alpha_bf.md
+              - revap: input-files/hydrologic-response-units/hru-lte.hru/revap.md
+              - rchg_dp: input-files/hydrologic-response-units/hru-lte.hru/rchg_dp.md
+              - sw_init: input-files/hydrologic-response-units/hru-lte.hru/sw_init.md
+              - aqu_init: input-files/hydrologic-response-units/hru-lte.hru/aqu_init.md
+              - aqu_sh_flo: input-files/hydrologic-response-units/hru-lte.hru/aqu_sh_flo.md
+              - aqu_dp_flo: input-files/hydrologic-response-units/hru-lte.hru/aqu_dp_flo.md
+              - snow_h2o: input-files/hydrologic-response-units/hru-lte.hru/snow_h2o.md
+              - lat: input-files/hydrologic-response-units/hru-lte.hru/lat.md
+              - soil_text: input-files/hydrologic-response-units/hru-lte.hru/soil_text.md
+              - trop_flag: input-files/hydrologic-response-units/hru-lte.hru/trop_flag.md
+              - grow_start: input-files/hydrologic-response-units/hru-lte.hru/grow_start.md
+              - grow_end: input-files/hydrologic-response-units/hru-lte.hru/grow_end.md
+              - plnt_typ: input-files/hydrologic-response-units/hru-lte.hru/plnt_typ.md
+              - stress: input-files/hydrologic-response-units/hru-lte.hru/stress.md
+              - pet_flag: input-files/hydrologic-response-units/hru-lte.hru/pet_flag.md
+              - irr_flag: input-files/hydrologic-response-units/hru-lte.hru/irr_flag.md
+              - irr_src: input-files/hydrologic-response-units/hru-lte.hru/irr_src.md
+              - t_drain: input-files/hydrologic-response-units/hru-lte.hru/t_drain.md
+              - usle_k: input-files/hydrologic-response-units/hru-lte.hru/usle_k.md
+              - usle_c: input-files/hydrologic-response-units/hru-lte.hru/usle_c.md
+              - usle_p: input-files/hydrologic-response-units/hru-lte.hru/usle_p.md
+              - usle_ls: input-files/hydrologic-response-units/hru-lte.hru/usle_ls.md
+      - Landuse And Management:
+          - landuse.lum:
+              - input-files/landuse-and-management/landuse.lum.md
+              - name (landuse.lum): input-files/landuse-and-management/landuse.lum/name.md
+              - cal_grp: input-files/landuse-and-management/landuse.lum/cal_grp.md
+              - plnt_com: input-files/landuse-and-management/landuse.lum/plnt_com.md
+              - mgt: input-files/landuse-and-management/landuse.lum/mgt.md
+              - cn2: input-files/landuse-and-management/landuse.lum/cn2.md
+              - cons_prac: input-files/landuse-and-management/landuse.lum/cons_prac.md
+              - urban: input-files/landuse-and-management/landuse.lum/urb_ro.md
+              - urb_ro: input-files/landuse-and-management/landuse.lum/urb_ro-1.md
+              - ov_mann: input-files/landuse-and-management/landuse.lum/ov_mann.md
+              - tile: input-files/landuse-and-management/landuse.lum/tile.md
+              - sep: input-files/landuse-and-management/landuse.lum/sep.md
+              - vfs: input-files/landuse-and-management/landuse.lum/vfs.md
+              - grww: input-files/landuse-and-management/landuse.lum/grww.md
+              - bmp: input-files/landuse-and-management/landuse.lum/bmp.md
+          - management.sch:
+              - input-files/landuse-and-management/management.sch.md
+              - name (management.sch): input-files/landuse-and-management/management.sch/name-management.sch.md
+              - op_typ: input-files/landuse-and-management/management.sch/op_typ.md
+              - op_data1: input-files/landuse-and-management/management.sch/op_data1.md
+              - op_data2: input-files/landuse-and-management/management.sch/op_data2.md
+              - op_data3: input-files/landuse-and-management/management.sch/op_data3.md
+          - cntable.lum:
+              - input-files/landuse-and-management/cntable.lum.md
+              - name (cntable.lum): input-files/landuse-and-management/cntable.lum/name_cn.md
+              - cn_a: input-files/landuse-and-management/cntable.lum/cn_a.md
+              - cn_b: input-files/landuse-and-management/cntable.lum/cn_b.md
+              - cn_c: input-files/landuse-and-management/cntable.lum/cn_c.md
+              - cn_d: input-files/landuse-and-management/cntable.lum/cn_d.md
+          - cons_practice.lum:
+              - input-files/landuse-and-management/cons_practice.lum.md
+              - name (cons_practice.lum): input-files/landuse-and-management/cons_practice.lum/name_consp.md
+              - usle_p: input-files/landuse-and-management/cons_practice.lum/usle_p.md
+              - slp_len_max: input-files/landuse-and-management/cons_practice.lum/slp_len_max.md
+          - ovn_table.lum:
+              - input-files/landuse-and-management/ovn_table.lum.md
+              - name (ovn_table.lum): input-files/landuse-and-management/ovn_table.lum/name_ovn.md
+              - ovn_mean: input-files/landuse-and-management/ovn_table.lum/ovn_mean.md
+              - ovn_min: input-files/landuse-and-management/ovn_table.lum/ovn_min.md
+              - ovn_max: input-files/landuse-and-management/ovn_table.lum/ovn_max.md
+          - plant.ini:
+              - input-files/landuse-and-management/plant.ini.md
+              - name (plant.ini): input-files/landuse-and-management/plant.ini/name_pcom.md
+              - plnt_cnt: input-files/landuse-and-management/plant.ini/plnt_cnt.md
+              - rot_yr_ini: input-files/landuse-and-management/plant.ini/rot_yr_ini.md
+              - plnt_name: input-files/landuse-and-management/plant.ini/plnt_name.md
+              - lc_status: input-files/landuse-and-management/plant.ini/lc_status.md
+              - lai_init: input-files/landuse-and-management/plant.ini/lai_init.md
+              - bm_init: input-files/landuse-and-management/plant.ini/bm_init.md
+              - phu_init: input-files/landuse-and-management/plant.ini/phu_init.md
+              - plnt_pop: input-files/landuse-and-management/plant.ini/plnt_pop.md
+              - yrs_init: input-files/landuse-and-management/plant.ini/yrs_init.md
+              - rsd_init: input-files/landuse-and-management/plant.ini/rsd_init.md
+      - Point Sources And Inlets:
+          - recall.rec:
+              - input-files/point-sources-and-inlets/recall.rec.md
+              - id (recall.rec): input-files/point-sources-and-inlets/recall.rec/id-recall.rec.md
+              - rec_typ: input-files/point-sources-and-inlets/recall.rec/rec_typ.md
+              - file: input-files/point-sources-and-inlets/recall.rec/file.md
+          - '''filename''.rec': input-files/point-sources-and-inlets/filename.rec.md
   - Output Files:
-    - File Format: output-files/output-file-format.md
-    - Debugging Outputs: output-files/debugging-outputs.md
-    - Soil: output-files/soil.md
-    - Management: output-files/management.md
-    - Flow Duration Curve: output-files/flow-duration-curve.md
-    - Water Balance: output-files/water-balance.md
-    - Nutrient Balance: output-files/nutrient-balance.md
-    - Losses: output-files/losses.md
-    - Plant and Weather: output-files/plant-and-weather.md
-    - Channel: output-files/channel.md
-    - Aquifer: output-files/aquifer.md
-    - Reservoir: output-files/reservoir.md
-    - Recall: output-files/recall.md
-    - Hydrographs: output-files/hydrographs.md
-    - Routing Unit: output-files/routing-unit.md
-    - Pesticides: output-files/pesticides.md
-    - Object Outputs: output-files/object-outputs.md
+      - Output File Format: output-files/output-file-format.md
+      - Debugging Outputs: output-files/debugging-outputs.md
+      - Soil: output-files/soil.md
+      - Management: output-files/management.md
+      - Flow Duration Curve: output-files/flow-duration-curve.md
+      - Water Balance: output-files/water-balance.md
+      - Nutrient Balance: output-files/nutrient-balance.md
+      - Losses: output-files/losses.md
+      - Plant and Weather: output-files/plant-and-weather.md
+      - Channel: output-files/channel.md
+      - Aquifer: output-files/aquifer.md
+      - Reservoir: output-files/reservoir.md
+      - Recall: output-files/recall.md
+      - Hydrographs: output-files/hydrographs.md
+      - Routing Unit: output-files/routing-unit.md
+      - Pesticides: output-files/pesticides.md
+      - Object Outputs: output-files/object-outputs.md
