@@ -5,7 +5,7 @@ site_description: SWAT+ I/O Documentation — Input and Output Files
 # Update repo_url once you have created your GitHub repository.
 # The edit_uri must match your default branch name (main or master).
 # Until then, remove or comment out these three lines to hide the buttons.
-repo_url: https://github.com/TUM-HFM/swatplus-docs.git
+repo_url: https://github.com/TUM-HFM/swatplus-docs
 repo_name: swatplus-docs
 edit_uri: edit/main/docs/
 
