@@ -1,0 +1,122 @@
+site_name: SWAT+ Documentation
+site_description: SWAT+ I/O Documentation — Input and Output Files
+
+# ── Repository ────────────────────────────────────────────────────────────────
+# Update repo_url once you have created your GitHub repository.
+# The edit_uri must match your default branch name (main or master).
+# Until then, remove or comment out these three lines to hide the buttons.
+repo_url: https://github.com/YOUR-ORG/swatplus-docs
+repo_name: swatplus-docs
+edit_uri: edit/main/docs/
+
+# ── Theme ─────────────────────────────────────────────────────────────────────
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.indexes
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - content.action.edit
+    - content.action.view
+    - content.code.copy
+
+# ── Markdown extensions ───────────────────────────────────────────────────────
+markdown_extensions:
+  - tables
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+# ── Plugins ───────────────────────────────────────────────────────────────────
+plugins:
+  - search
+  - git-revision-date-localized:
+      enable_creation_date: true
+      fallback_to_build_date: true   # works without git, shows real dates once committed
+
+# ── Navigation ────────────────────────────────────────────────────────────────
+nav:
+  - Introduction:
+    - Overview: index.md
+    - Watershed Configuration: introduction/watershed-configuration.md
+    - Calibration: introduction/calibration.md
+
+  - Input Files:
+    - File Format: input-files/input-file-format.md
+    - Master File (file.cio): input-files/master-file.md
+    - Simulation Settings: input-files/simulation-settings/index.md
+    - Climate:
+      - Overview: input-files/climate/index.md
+      - weather-sta.cli: input-files/climate/weather-sta-cli.md
+      - weather-wgn.cli: input-files/climate/weather-wgn-cli.md
+      - pcp.cli: input-files/climate/pcp-cli.md
+      - tmp.cli: input-files/climate/tmp-cli.md
+      - hmd.cli: input-files/climate/hmd-cli.md
+      - slr.cli: input-files/climate/slr-cli.md
+      - wnd.cli: input-files/climate/wnd-cli.md
+      - atmo.cli: input-files/climate/atmo-cli.md
+    - Basin: input-files/basin/index.md
+    - Landscape Units: input-files/landscape-units/index.md
+    - Routing Units: input-files/routing-units/index.md
+    - Hydrologic Response Units: input-files/hru/index.md
+    - Hydrology: input-files/hydrology/index.md
+    - Soils: input-files/soils/index.md
+    - Landuse & Management: input-files/landuse-management/index.md
+    - Decision Tables: input-files/decision-tables/index.md
+    - Management Practices: input-files/management-practices/index.md
+    - Structural Practices: input-files/structural-practices/index.md
+    - Databases: input-files/databases/index.md
+    - Aquifers: input-files/aquifers/index.md
+    - GWFlow: input-files/gwflow.md
+    - Channels: input-files/channels/index.md
+    - Reservoirs & Ponds: input-files/reservoirs/index.md
+    - Wetlands: input-files/wetlands/index.md
+    - Initialization: input-files/initialization/index.md
+    - Constituents: input-files/constituents/index.md
+    - Point Sources & Inlets: input-files/point-sources/index.md
+    - Connectivity: input-files/connectivity/index.md
+    - Water Allocation: input-files/water-allocation/index.md
+    - Calibration: input-files/calibration/index.md
+
+  - Output Files:
+    - File Format: output-files/output-file-format.md
+    - Debugging Outputs: output-files/debugging-outputs.md
+    - Soil: output-files/soil.md
+    - Management: output-files/management.md
+    - Flow Duration Curve: output-files/flow-duration-curve.md
+    - Water Balance: output-files/water-balance.md
+    - Nutrient Balance: output-files/nutrient-balance.md
+    - Losses: output-files/losses.md
+    - Plant and Weather: output-files/plant-and-weather.md
+    - Channel: output-files/channel.md
+    - Aquifer: output-files/aquifer.md
+    - Reservoir: output-files/reservoir.md
+    - Recall: output-files/recall.md
+    - Hydrographs: output-files/hydrographs.md
+    - Routing Unit: output-files/routing-unit.md
+    - Pesticides: output-files/pesticides.md
+    - Object Outputs: output-files/object-outputs.md
