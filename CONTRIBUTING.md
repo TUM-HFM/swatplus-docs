@@ -20,7 +20,7 @@ You need a free GitHub account. If you don't have one:
 Open the documentation site:
 
 ```
-https://YOUR-ORG.github.io/swatplus-docs
+https://tum-hfm.github.io/swatplus-docs/
 ```
 
 Browse it exactly like the original GitBook. Use the tabs at the top
