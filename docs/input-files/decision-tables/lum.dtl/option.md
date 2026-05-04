@@ -42,4 +42,4 @@
 | min_frac    | Transfer a fraction of the source's flow                                   | Fraction betwen 0 and 1.0      |                      |               |
 | recall      | Use records of transferred volumes at daily, monthly and yearly timesteps  |                                |                      |               |
 
-Last updated 1 year ago
+Last updated 4th May 2026
