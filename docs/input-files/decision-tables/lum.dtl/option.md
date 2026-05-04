@@ -16,6 +16,8 @@
 |                                     |                       |                                                                                     |
 |                                     |                       |                                                                                     |
 
+### Reservoir release options
+
 | Option      | Description                                                                | const                          | const2               | fp            |
 | ----------- | -------------------------------------------------------------------------- | ------------------------------ | -------------------- | ------------- |
 | rate        | Release at constant rate                                                   | Release rate in m3/s           |                      |               |
@@ -25,8 +27,19 @@
 | days        | Number of days it takes to drawdown to target volume                       | Number of days                 | Multiplier           | Target volume |
 | dyrt        | Release based on drawdown days and percentage of principal volume          | Number of days                 | Release rate in m3/s |               |
 | inflo\_targ | Release inflow and all volume over target                                  |                                |                      | Target volume |
-| irr\_dmd    | Release based on irrigation demand of HRU or other water allocation object |                                |                      |               |
+| irrig\_dmd    | Release based on irrigation demand of HRU or other water allocation object |                                |                      |               |
 | weir        | Release based on weir equation                                             |                                |                      |               |
 | meas        | Release measured outflow                                                   |                                |                      | Recall file   |
+
+
+### Divert options
+
+| Option      | Description                                                                | const                          | const2               | fp            |
+| ----------- | -------------------------------------------------------------------------- | ------------------------------ | -------------------- | ------------- |
+| flo_cms     | Sets constant diversion rate                                               | Diversion rate in m3/s         |                      |               |
+| min_cms     | Defines a minimum flow in the source; only transfer the excess             | Min. flow value in m³/s        |                      |               |
+| all_flo     | Transfer all the flow from the source                                      | -                              |                      |               |
+| min_frac    | Transfer a fraction of the source's flow                                   | Fraction betwen 0 and 1.0      |                      |               |
+| recall      | Use records of transferred volumes at daily, monthly and yearly timesteps  |                                |                      |               |
 
 Last updated 1 year ago
