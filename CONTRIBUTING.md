@@ -93,12 +93,39 @@ You will see a **"Commit changes"** section:
 2. In the second box (optional), add more detail if needed.
    For example: `The default was listed as 0 but should be 1.5 per SWAT+ rev 61 source code`
 
-3. Leave **"Commit directly to the main branch"** selected.
+3. **If you have more edits to make after this one**, add `[skip ci]` at the
+   end of your commit message — see the section below for why this matters.
 
-4. Click the green **"Commit changes"** button.
+4. Leave **"Commit directly to the main branch"** selected.
+
+5. Click the green **"Commit changes"** button.
 
 That's it. Your change is saved. The documentation site will update
-automatically within about 2 minutes.
+automatically within about 2 minutes — unless you used `[skip ci]`, in which
+case it will update when you commit your final change of the day.
+
+---
+
+## Skipping the site rebuild — when to use `[skip ci]`
+
+Every time you commit a change, GitHub automatically rebuilds and republishes
+the documentation site. This uses a small quota of free build minutes.
+
+**If you are making several edits in one session** (which is common), you
+should skip the rebuild on all but your last commit. This way the site only
+rebuilds once at the end, saving quota and avoiding unnecessary intermediate
+deploys.
+
+To skip a rebuild, add `[skip ci]` to the end of your commit message:
+
+| Situation | Commit message example |
+| --------- | ---------------------- |
+| More edits to come | `Fix adj_pcp default value [skip ci]` |
+| More edits to come | `Add missing wnd_dir row [skip ci]` |
+| **Last edit of the session** | `Fix slr.cli description` ← no skip, site rebuilds now |
+
+**Simple rule:** add `[skip ci]` to every commit except your last one of the
+day. Your last commit triggers the rebuild and publishes everything at once.
 
 ---
 
